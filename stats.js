@@ -267,8 +267,8 @@ config.configFile(process.argv[2], function (config) {
             timers[key].push(Number(fields[0] || 0));
             timer_counters[key] += (1 / sampleRate);
           } else if (metric_type === "g") {
-            if (gauges[key] && fields[0].match(/^[-+]{2}/)) { // now looks for ++ or --
-              gauges[key] += Number(fields[0] || 0);
+            if (gauges[key] && fields[0].match(/^[-+]{2}/)) { // matches ++ or --
+              gauges[key] += Number(fields[0].substring(1) || 0); // drops first character
             } else {
               gauges[key] = Number(fields[0] || 0);
             }
